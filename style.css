@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+h3 {
+ margin-bottom: 0.4rem;
+ margin-top: 0.4rem;;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0.2rem;
+}
+
+.box {
+    margin: 0.6rem;
+    margin-left: 1rem;
+    width: 14rem;
+    height: 14rem;
+    border: 4px solid black;
+    border-radius: 12px;
+}
