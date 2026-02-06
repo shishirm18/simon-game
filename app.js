@@ -39,7 +39,7 @@ for(btn of btns){
 function userBtnPress(){
         flashBtn(this);
         userSeq.push(this.classList[1]);
-        checkMatch(userSeq.length-1);  //IMP: current userSeq length will be the idx to verify the match with gameSeq
+        checkMatch(userSeq.length-1);  //IMP: current userSeq length will be the idx (if 1 -> verify 0th idx for both)
 }
 
 function checkMatch(idx){
@@ -49,7 +49,7 @@ function checkMatch(idx){
             console.log("Match found(Level cleared)!, updating to next level...!");
             gameOn();
         }else{
-            console.log("Matching still left!");
+            console.log("Matching seq still left!");
         }
 
     }else{
