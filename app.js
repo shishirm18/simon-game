@@ -39,7 +39,6 @@ for(btn of btns){
 function userBtnPress(){
         flashBtn(this);
         userSeq.push(this.classList[1]);
-        console.log(userSeq);
         checkMatch(userSeq.length-1);  //IMP: current userSeq length will be the idx to verify the match with gameSeq
 }
 
@@ -47,18 +46,24 @@ function checkMatch(idx){
     // each level indicates how many elements are there inside seq.
     if(userSeq[idx] === gameSeq[idx]){
         if(userSeq.length == gameSeq.length){
-            console.log("Match found!, Please continue the game!");
+            console.log("Match found(Level cleared)!, updating to next level...!");
             gameOn();
         }else{
             console.log("Matching still left!");
         }
-        
+
     }else{
         levelDisplay.innerHTML = `<h3>GAME OVER! <u>Your Score is ${level-1}</u>, Press any key to start a new game.<h3>`;
-        started = false;
-        level = 0;
-        gameSeq = [];
+        resetGame();
     }
+}
+
+//Helper: resetFunction:
+function resetGame(){
+    started = false;
+    level = 0;
+    gameSeq = [];
+    userSeq = [];
 }
 
 //Helper: select the random button to flash
