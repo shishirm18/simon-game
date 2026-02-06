@@ -4,39 +4,61 @@ let userSeq = [];
 let started = false;
 let level = 0;
 
+// Selectors
+let levelDisplay = document.querySelector('h3');
+let btns = document.querySelectorAll('.box'); 
+
 // Step 1: Press any key to start the game
 document.addEventListener("keypress", function(){
     if(started == false){
         console.log("Game started!");
         started = true;
-        startGame();
+        gameOn();
     }
 })
 
 // Step 2 : Show its level 1 and start the btn flash
-let levelDisplay = document.querySelector('h3');
-let btns = document.querySelectorAll('.box'); 
-
-for(btn of btns){
-    btn.addEventListener("click", function(){
-        flashBtn(this);
-        userSeq.push(this.classList[1]);
-    })
-}
-
 function gameOn(){
     level++;
-    levelDisplay.innerText = `Level ${level}`;
-
-    
-    let allGood = true;
-    userSeq = []
+    levelDisplay.innerHTML = `<u>Level ${level}</u>`;
+    userSeq = []  // Each level userSeq should start clean
 
     //flash the random button for the user
     let btn = document.querySelector(`.${randomBtn()}`);
     flashBtn(btn);
     gameSeq.push(btn.classList[1]);
+    console.log(gameSeq);
+}
 
+// Adding event listeners for all 4 buttons
+for(btn of btns){
+    btn.addEventListener("click", userBtnPress);
+}
+
+// When User Press the button
+function userBtnPress(){
+        flashBtn(this);
+        userSeq.push(this.classList[1]);
+        console.log(userSeq);
+        checkMatch(userSeq.length-1);  //IMP: current userSeq length will be the idx to verify the match with gameSeq
+}
+
+function checkMatch(idx){
+    // each level indicates how many elements are there inside seq.
+    if(userSeq[idx] === gameSeq[idx]){
+        if(userSeq.length == gameSeq.length){
+            console.log("Match found!, Please continue the game!");
+            gameOn();
+        }else{
+            console.log("Matching still left!");
+        }
+        
+    }else{
+        levelDisplay.innerHTML = `<h3>GAME OVER! <u>Your Score is ${level-1}</u>, Press any key to start a new game.<h3>`;
+        started = false;
+        level = 0;
+        gameSeq = [];
+    }
 }
 
 //Helper: select the random button to flash
